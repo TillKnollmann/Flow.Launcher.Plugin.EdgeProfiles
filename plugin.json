@@ -7,6 +7,6 @@
     "Version": "1.0.0",
     "Language": "python",
     "Website": "https://github.com/TillKnollmann/Flow.Launcher.Plugin.EdgeProfiles",
-    "IcoPath": "Images\\app.png",
+    "IcoPath": "https://cdn.jsdelivr.net/gh/TillKnollmann/Flow.Launcher.Plugin.EdgeProfiles@main/Images/app.png",
     "ExecuteFileName": "main.py"
 }
