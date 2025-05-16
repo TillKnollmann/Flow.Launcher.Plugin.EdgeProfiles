@@ -8,6 +8,8 @@ You can install this plugin via `pm install Edge Profile Switcher`
 
 ## Usage
 
+![Demo Usage Gif](https://cdn.jsdelivr.net/gh/TillKnollmann/Flow.Launcher.Plugin.EdgeProfiles@main/assets/profile-switcher-demo.gif)
+
 Type `edge <search-term>` and see a list of profiles available from your Microsoft Edge installation.
 
 Select a result to launch a new window in the respective profile.
