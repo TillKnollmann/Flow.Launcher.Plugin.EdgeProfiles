@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths-ignore:
       - .github/workflows/*
+      - assets/*
 
 jobs:
   publish:
