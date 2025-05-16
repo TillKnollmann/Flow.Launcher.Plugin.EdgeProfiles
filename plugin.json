@@ -1,7 +1,7 @@
 {
     "ID": "2fdb3f66-fb98-4443-a1ce-24088bedb1f4",
     "ActionKeyword": "profile",
-    "Name": "Edge Profile Switcher",
+    "Name": "Edge Profiles",
     "Description": "Lists and launches Microsoft Edge profiles",
     "Author": "Till Knollmann",
     "Version": "1.0.0",

@@ -4,13 +4,13 @@ A FlowLauncher plugin to easily launch different MS Edge Profiles.
 
 ## Installation
 
-You can install this plugin via `pm install Edge Profile Switcher`
+You can install this plugin via `pm install Edge Profiles`
 
 ## Usage
 
 ![Demo Usage Gif](https://cdn.jsdelivr.net/gh/TillKnollmann/Flow.Launcher.Plugin.EdgeProfiles@main/assets/profile-switcher-demo.gif)
 
-Type `edge <search-term>` and see a list of profiles available from your Microsoft Edge installation.
+Type `profile <search-term>` and see a list of profiles available from your Microsoft Edge installation.
 
 Select a result to launch a new window in the respective profile.
 
