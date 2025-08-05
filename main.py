@@ -9,14 +9,14 @@ sys.path.append(os.path.join(parent_folder_path, 'plugin'))
 from flowlauncher import FlowLauncher
 
 
-class EdgePaths:
-    """Handles discovery of Microsoft Edge executable paths and user profile data paths."""
+class ChromePaths:
+    """Handles discovery of Microsoft Chrome executable paths and user profile data paths."""
 
-    USER_DATA_PATH = os.path.join(os.environ.get('LOCALAPPDATA', ''), 'Microsoft', 'Edge', 'User Data')
+    USER_DATA_PATH = os.path.join(os.environ.get('LOCALAPPDATA', ''), 'Google', 'Chrome', 'User Data')
 
     _edge_paths = [
-        os.path.join(os.environ.get('PROGRAMFILES(X86)', ''), 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
-        os.path.join(os.environ.get('PROGRAMFILES', ''), 'Microsoft', 'Edge', 'Application', 'msedge.exe')
+        os.path.join(os.environ.get('PROGRAMFILES(X86)', ''), 'Google', 'Chrome', 'Application', 'chorme.exe'),
+        os.path.join(os.environ.get('PROGRAMFILES', ''), 'Google', 'Chrome', 'Application', 'chorme.exe')
     ]
 
     EXECUTABLE_PATH = next((path for path in _edge_paths if os.path.exists(path)), None)
@@ -69,7 +69,7 @@ class EdgeProfileManager:
         profiles = []
         profile_name_map = {}
 
-        local_state_path = os.path.join(EdgePaths.USER_DATA_PATH, 'Local State')
+        local_state_path = os.path.join(ChromePaths.USER_DATA_PATH, 'Local State')
         if os.path.exists(local_state_path):
             try:
                 with open(local_state_path, 'r', encoding='utf-8') as f:
@@ -79,12 +79,12 @@ class EdgeProfileManager:
             except Exception as e:
                 print(f"ERROR: Failed to read Local State: {e}", file=sys.stderr)
 
-        if not os.path.exists(EdgePaths.USER_DATA_PATH):
+        if not os.path.exists(ChromePaths.USER_DATA_PATH):
             return profiles
 
         try:
-            for item in os.listdir(EdgePaths.USER_DATA_PATH):
-                item_path = os.path.join(EdgePaths.USER_DATA_PATH, item)
+            for item in os.listdir(ChromePaths.USER_DATA_PATH):
+                item_path = os.path.join(ChromePaths.USER_DATA_PATH, item)
                 if os.path.isdir(item_path) and (item.startswith('Profile') or item == 'Default'):
                     profiles.append({
                         'name': profile_name_map.get(item, item),
@@ -99,12 +99,12 @@ class EdgeProfileManager:
     @staticmethod
     def launch_profile(profile_directory):
         """Launches Edge using the specified profile."""
-        if not EdgePaths.EXECUTABLE_PATH:
+        if not ChromePaths.EXECUTABLE_PATH:
             print("ERROR: Edge executable not found.", file=sys.stderr)
             return
 
         try:
-            subprocess.Popen([EdgePaths.EXECUTABLE_PATH, f'--profile-directory={profile_directory}'])
+            subprocess.Popen([ChromePaths.EXECUTABLE_PATH, f'--profile-directory={profile_directory}'])
         except Exception as e:
             print(f"ERROR: Failed to launch profile {profile_directory}: {e}", file=sys.stderr)
 
@@ -115,14 +115,14 @@ class EdgeProfilePlugin(FlowLauncher):
     def query(self, query_text):
         results = []
 
-        if not EdgePaths.EXECUTABLE_PATH:
+        if not ChromePaths.EXECUTABLE_PATH:
             results.append(Result("Microsoft Edge Not Found", "Could not find msedge.exe.", EdgeProfileManager.ERROR_ICON).to_json())
         else:
             profiles = EdgeProfileManager.get_profiles()
             filtered_profiles = [p for p in profiles if query_text.lower() in p['name'].lower()] if query_text else profiles
 
             if not filtered_profiles:
-                subtitle = f"No Edge profiles match '{query_text}'." if query_text else f"Looked in {EdgePaths.USER_DATA_PATH}."
+                subtitle = f"No Edge profiles match '{query_text}'." if query_text else f"Looked in {ChromePaths.USER_DATA_PATH}."
                 results.append(Result("No matching profiles found", subtitle, EdgeProfileManager.DEFAULT_EDGE_ICON).to_json())
             else:
                 for profile in filtered_profiles:
