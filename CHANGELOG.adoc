@@ -1,0 +1,9 @@
+= Changelog
+
+== Unreleased
+
+* TODO
+
+== https://github.com/TillKnollmann/Flow.Launcher.Plugin.EdgeProfiles/releases/tag/v1.0.0[1.0.0] – 17.05.25
+
+* Initial version
